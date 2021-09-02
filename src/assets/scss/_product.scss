@@ -1,0 +1,9 @@
+.shopProduct {
+  &__image img {
+    max-height: 12rem;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  &__title{ height:5rem }
+}

@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ProductsProvider from "context/productsContext";
+import Navbar from "components/navbar/Navbar";
+import ProductList from "components/products/ProductList";
+import ProductDetail from "components/products/ProductDetail";
+
+const routes = [
+  { path: "/producto/:id", name: "", component: ProductDetail },
+  { path: "/", name: "Products", component: ProductList },
+];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ProductsProvider>
+      <Router>
+        <Navbar />
+        <main>
+          <div className="container-lg pt-4">
+            <Switch>
+              {routes.map((route) => (
+                <Route
+                  key={route.path}
+                  exact
+                  path={route.path}
+                  component={route.component}
+                />
+              ))}
+            </Switch>
+          </div>
+        </main>
+      </Router>
+    </ProductsProvider>
   );
 }
 
